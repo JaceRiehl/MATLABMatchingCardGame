@@ -91,20 +91,44 @@ yLine = [0 4]
 
 %maybe used p(i) as a position and store a random picture at it
 basePicture = imread('https://ak1.picdn.net/shutterstock/videos/7183621/thumb/1.jpg');
-p(1).pic = imread('https://img.buzzfeed.com/buzzfeed-static/static/2017-05/16/9/campaign_images/buzzfeed-prod-fastlane-03/this-smiling-siberian-husky-will-put-an-end-to-al-2-31329-1494942398-0_dblbig.jpg')
-p(2).pic = imread('https://image.freepik.com/free-photo/husky-breed-dog-with-tongue-out_1187-1501.jpg');
-p(3).pic = imread('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTivkjtxdQW8UQNMw5Be-BnVDNtLqQ7Rg6tGrmRfL2WBEpQAtFQ');
-p(4).pic = imread('http://www.dogbreedslist.info/uploads/allimg/dog-pictures/Siberian-Husky-1.jpg');
-p(5).pic = imread('https://www.pupcdn.com/photo/puppy/525832/5a03afec50831-3942755.jpg');
-p(6).pic = imread('http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/iStock_000012677298_Small.jpg');
-p(7).pic = imread('https://t2.ea.ltmcdn.com/en/images/5/1/4/img_types_and_breeds_of_husky_dogs_1415_paso_2_600.jpg');
-p(8).pic = imread('http://buzzsharer.com/wp-content/uploads/2015/04/cute-husky-puppy-pics.png');
+pic(1).pic = imread('https://img.buzzfeed.com/buzzfeed-static/static/2017-05/16/9/campaign_images/buzzfeed-prod-fastlane-03/this-smiling-siberian-husky-will-put-an-end-to-al-2-31329-1494942398-0_dblbig.jpg');
+pic(2).pic = imread('https://image.freepik.com/free-photo/husky-breed-dog-with-tongue-out_1187-1501.jpg');
+pic(3).pic = imread('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTivkjtxdQW8UQNMw5Be-BnVDNtLqQ7Rg6tGrmRfL2WBEpQAtFQ');
+pic(4).pic = imread('http://www.dogbreedslist.info/uploads/allimg/dog-pictures/Siberian-Husky-1.jpg');
+pic(5).pic = imread('https://www.pupcdn.com/photo/puppy/525832/5a03afec50831-3942755.jpg');
+pic(6).pic = imread('http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/iStock_000012677298_Small.jpg');
+pic(7).pic = imread('https://t2.ea.ltmcdn.com/en/images/5/1/4/img_types_and_breeds_of_husky_dogs_1415_paso_2_600.jpg');
+pic(8).pic = imread('http://buzzsharer.com/wp-content/uploads/2015/04/cute-husky-puppy-pics.png');
 set(gca,'YDir','reverse');
 
-
-for i = 1:8
-    p(i+8).pic = p(i).pic
+for i = 1:8 
+    pic(i).ID = i;
+    pic(i).TimesUsed = 2;
 end
+
+
+p(16) = struct('ID', -1, 'pic', 'null');
+for i = 1:16
+    p(i).ID = i;
+end
+
+index = 1
+while index < 17
+    rng('shuffle'); 
+    r = randi(8) 
+    if(pic(r).TimesUsed ~= 0) 
+        p(index).pic = pic(r).pic;
+        p(index).picID = pic(r).ID;
+        pic(r).TimesUsed = pic(r).TimesUsed - 1;
+        index = index + 1;
+    end
+end
+
+% for i = 1:8
+%     p(i+8).pic = p(i).pic
+% end
+
+
 ind = 1
 for i = 1:4
     for j = 1:4
