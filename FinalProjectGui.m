@@ -100,7 +100,8 @@ pic(6).pic = imread('http://images.mentalfloss.com/sites/default/files/styles/in
 pic(7).pic = imread('https://t2.ea.ltmcdn.com/en/images/5/1/4/img_types_and_breeds_of_husky_dogs_1415_paso_2_600.jpg');
 pic(8).pic = imread('http://buzzsharer.com/wp-content/uploads/2015/04/cute-husky-puppy-pics.png');
 set(gca,'YDir','reverse');
-
+set(gca,'YTickLabel',[])
+set(gca,'XTickLabel',[])
 for i = 1:8 
     pic(i).ID = i;
     pic(i).TimesUsed = 2;
@@ -189,6 +190,7 @@ while(1)
         posTemp = roundx * roundy
         delete(pic1(posTemp))
         pause(1)
+        
         pic1(posTemp) = image([(roundx-1) roundx],[(roundy-1) roundy],basePicture)
         strikedPos = posTemp;
         striked = true;
