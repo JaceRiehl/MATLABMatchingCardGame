@@ -81,15 +81,12 @@ function start_Callback(hObject, eventdata, handles)
 
 handles.start.String = "Start Over";
 
-
 axis([0,4,0,4])
 hold on;
 x = [0 1];
 y = [0 1];
-xLine = [0 4]
-yLine = [0 4]
 
-%maybe used p(i) as a position and store a random picture at it
+
 basePicture = imread('https://ak1.picdn.net/shutterstock/videos/7183621/thumb/1.jpg');
 pic(1).pic = imread('https://img.buzzfeed.com/buzzfeed-static/static/2017-05/16/9/campaign_images/buzzfeed-prod-fastlane-03/this-smiling-siberian-husky-will-put-an-end-to-al-2-31329-1494942398-0_dblbig.jpg');
 pic(2).pic = imread('https://image.freepik.com/free-photo/husky-breed-dog-with-tongue-out_1187-1501.jpg');
@@ -113,10 +110,10 @@ for i = 1:16
     p(i).ID = i;
 end
 
-index = 1
+index = 1;
 while index < 17
     rng('shuffle'); 
-    r = randi(8) 
+    r = randi(8); 
     if(pic(r).TimesUsed ~= 0) 
         p(index).pic = pic(r).pic;
         p(index).picID = pic(r).ID;
@@ -125,121 +122,84 @@ while index < 17
     end
 end
 
-% for i = 1:8
-%     p(i+8).pic = p(i).pic
-% end
 
-
-ind = 1
+ind = 1;
 for i = 1:4
     for j = 1:4
-    p(ind).draw = image(x,y,p(ind).pic);
-    ind = ind + 1
-    x = x + 1
+        p(ind).draw = image(x,y,p(ind).pic);
+        ind = ind + 1;
+        x = x + 1;
     end
     x = [0 1];
-    y = y + 1
-    
+    y = y + 1;
 end
 
 x = [0 1];
 y = [0 1];
 
-%used to give a random position value to 
-%i have to make sure that the value chosen hasnt already been chosen 
-% for i = 1:16
-%     randx = rand(1) * 16 - 1
-%     randy = rand(1) * 16 - 1
-%     
-% end
-% for i = 1:2
-%     for j = 1:4
-%         image(x,y, p(i).pic) 
-%         image(x + 2, y + 2, p(i).pic) 
-%         x = x + 1
-%     end
-%     x = [0 1];
-%     y = y + 1;
-% end
-% pause(5)
-% x = [0 1];
-% y = [0 1];
-
-
 %show the Question marks 
-qMarkIndex = 1
+%pic1(16) = struct('pic', 'null');
+
+qMarkIndex = 1;
 for i = 0:3
     for j = 0:3
     pic1(qMarkIndex) = image(x,y,basePicture);
     
-    x = x + 1
-    qMarkIndex = qMarkIndex + 1
+    x = x + 1;
+    qMarkIndex = qMarkIndex + 1;
     end
     x = [0 1];
-    y = y + 1
+    y = y + 1;
     
 end
 
 strikedPos = 0;
-striked = false;
+amountShowing = 0;
+tic
 while(1)
-    [clickX clickY] = ginput(1);
+    [clickX, clickY] = ginput(1);
     roundx1 = ceil(clickX);
     roundy1 = ceil(clickY);
     if(roundy1 == 1)
-        posTemp = roundx1 * roundy1
+        posTemp = roundx1 * roundy1;
         delete(pic1(posTemp))
         pause(1)
         p(posTemp).picID;
-        %pic1(posTemp) = image([(roundx-1) roundx],[(roundy-1) roundy],basePicture)
         strikedPos = posTemp;
-        striked = true;
     end
     if(roundy1 == 2)
-        posTemp = roundx1 + 4
+        posTemp = roundx1 + 4;
         delete(pic1(posTemp));
         pause(1)
-        %pic1(posTemp) = image([(roundx-1) roundx],[(roundy-1) roundy],basePicture)
         strikedPos = posTemp;
-        striked = true;
     end
     if(roundy1 == 3) 
-        posTemp = roundx1-1 + 9
+        posTemp = roundx1-1 + 9;
         delete(pic1(posTemp));
         pause(1)
-        %pic1(posTemp) = image([(roundx-1) roundx],[(roundy-1) roundy],basePicture)
         strikedPos = posTemp;
-        striked = true;
         
     end
     if(roundy1 == 4) 
         if(roundx1 == 1)
             delete(pic1(13));
             pause(1)
-            %pic1(13) = image([0 1],[3 4],basePicture)
             strikedPos = 13;
-            striked = true;
         end
         if(roundx1 == 2)
             delete(pic1(14));
             pause(1)
-            %pic1(14) = image([1 2],[3 4],basePicture)
             strikedPos = 14;
-            striked = true;
         end
         if(roundx1 == 3)
             delete(pic1(15));
             pause(1)
-            %pic1(15) = image([2 3],[3 4],basePicture)
             strikedPos = 15;
-            striked = true;
         end
         if(roundx1 == 4)
             delete(pic1(16));
             pause(1)
-            %pic1(16) = image([3 4],[3 4],basePicture)
-            strikedPos = 16
-            striked = true
+            strikedPos = 16;
         end
     end
     
@@ -258,22 +218,25 @@ while(1)
         
         if(p(posTemp).picID ~= p(strikedPos).picID) 
             pic1(posTemp) = image([(roundx2-1) roundx2],[(roundy2-1) roundy2],basePicture);
-            pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);          
+            pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);
+        else 
+            amountShowing = amountShowing + 2;
         end
         strikedPos = 0;
-        striked = false;
     end
     
     if(roundy2 == 2)
-        posTemp = roundx2 + 4
+        posTemp = roundx2 + 4;
         delete(pic1(posTemp));
         pause(1)
         if(p(posTemp).picID ~= p(strikedPos).picID) 
             pic1(posTemp) = image([(roundx2-1) roundx2],[(roundy2-1) roundy2],basePicture);
-            pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);          
+            pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);
+        else 
+            amountShowing = amountShowing + 2;      
         end   
+        
         strikedPos = 0;
-        striked = false;
     end
     
     if(roundy2 == 3) 
@@ -282,10 +245,11 @@ while(1)
         pause(1)
         if(p(posTemp).picID ~= p(strikedPos).picID) 
             pic1(posTemp) = image([(roundx2-1) roundx2],[(roundy2-1) roundy2],basePicture);
-            pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);          
+            pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);         
+        else 
+            amountShowing = amountShowing + 2;
         end
         strikedPos = 0;
-        striked = false;
         
     end
     
@@ -295,45 +259,58 @@ while(1)
             pause(1)
             if(p(13).picID ~= p(strikedPos).picID) 
                 pic1(13) = image([(roundx2-1) roundx2],[(roundy2-1) roundy2],basePicture);
-                pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);          
+                pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);
+            else 
+                amountShowing = amountShowing + 2;
             end
             strikedPos = 0;
-            striked = false;
         end
         if(roundx2 == 2)
             delete(pic1(14));
             pause(1)
             if(p(14).picID ~= p(strikedPos).picID) 
                 pic1(14) = image([(roundx2-1) roundx2],[(roundy2-1) roundy2],basePicture);
-                pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);          
+                pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);
+            else 
+                p(posTemp).showing = true;
+                p(strikedPos).showing = 1;
+                amountShowing = amountShowing + 2;
             end
             strikedPos = 0;
-            striked = false;
         end
         if(roundx2 == 3)
             delete(pic1(15));
             pause(1)
             if(p(15).picID ~= p(strikedPos).picID) 
                 pic1(15) = image([(roundx2-1) roundx2],[(roundy2-1) roundy2],basePicture);
-                pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);          
+                pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);
+            else 
+                amountShowing = amountShowing + 2;
             end
-            strikedPos = 0;
-            striked = false;
+            strikedPos = 0;         
         end
         if(roundx2 == 4)
             delete(pic1(16));
             pause(1)
             if(p(16).picID ~= p(strikedPos).picID) 
                 pic1(16) = image([(roundx2-1) roundx2],[(roundy2-1) roundy2],basePicture);
-                pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);          
+                pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);
+            else 
+                amountShowing = amountShowing + 2;
             end
             strikedPos = 0;
-            striked = false;
         end
     end
     
+    disp("Amount Showing " + amountShowing);
     
-    
+
+     if(amountShowing == 16)
+         finalTime = toc; 
+         break; 
+     end
 end
 
+
+handles.text3.String = finalTime;
 roundx1
