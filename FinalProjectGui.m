@@ -184,10 +184,10 @@ strikedPos = 0;
 striked = false;
 while(1)
     [clickX clickY] = ginput(1);
-    roundx = ceil(clickX);
-    roundy = ceil(clickY);
-    if(roundy == 1)
-        posTemp = roundx * roundy
+    roundx1 = ceil(clickX);
+    roundy1 = ceil(clickY);
+    if(roundy1 == 1)
+        posTemp = roundx1 * roundy1
         delete(pic1(posTemp))
         pause(1)
         p(posTemp).picID;
@@ -195,16 +195,16 @@ while(1)
         strikedPos = posTemp;
         striked = true;
     end
-    if(roundy == 2)
-        posTemp = roundx + 4
+    if(roundy1 == 2)
+        posTemp = roundx1 + 4
         delete(pic1(posTemp));
         pause(1)
         %pic1(posTemp) = image([(roundx-1) roundx],[(roundy-1) roundy],basePicture)
         strikedPos = posTemp;
         striked = true;
     end
-    if(roundy == 3) 
-        posTemp = roundx-1 + 9
+    if(roundy1 == 3) 
+        posTemp = roundx1-1 + 9
         delete(pic1(posTemp));
         pause(1)
         %pic1(posTemp) = image([(roundx-1) roundx],[(roundy-1) roundy],basePicture)
@@ -212,29 +212,29 @@ while(1)
         striked = true;
         
     end
-    if(roundy == 4) 
-        if(roundx == 1)
+    if(roundy1 == 4) 
+        if(roundx1 == 1)
             delete(pic1(13));
             pause(1)
             %pic1(13) = image([0 1],[3 4],basePicture)
             strikedPos = 13;
             striked = true;
         end
-        if(roundx == 2)
+        if(roundx1 == 2)
             delete(pic1(14));
             pause(1)
             %pic1(14) = image([1 2],[3 4],basePicture)
             strikedPos = 14;
             striked = true;
         end
-        if(roundx == 3)
+        if(roundx1 == 3)
             delete(pic1(15));
             pause(1)
             %pic1(15) = image([2 3],[3 4],basePicture)
             strikedPos = 15;
             striked = true;
         end
-        if(roundx == 4)
+        if(roundx1 == 4)
             delete(pic1(16));
             pause(1)
             %pic1(16) = image([3 4],[3 4],basePicture)
@@ -243,10 +243,97 @@ while(1)
         end
     end
     
-    %If strikedOnce == true search through the indexes of pic1(i)
-    %reset strikedOnce to false if the pictures are incorrect 
+    %Second Round
+    
+    [clickX, clickY] = ginput(1);
+    roundx2 = ceil(clickX);
+    roundy2 = ceil(clickY);
+    
+    if(roundy2 == 1)
+        posTemp = roundx2 * roundy2;
+        delete(pic1(posTemp));
+        pause(1);
+        p(posTemp).picID
+        p(strikedPos).picID
+        
+        if(p(posTemp).picID ~= p(strikedPos).picID) 
+            pic1(posTemp) = image([(roundx2-1) roundx2],[(roundy2-1) roundy2],basePicture);
+            pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);          
+        end
+        strikedPos = 0;
+        striked = false;
+    end
+    
+    if(roundy2 == 2)
+        posTemp = roundx2 + 4
+        delete(pic1(posTemp));
+        pause(1)
+        if(p(posTemp).picID ~= p(strikedPos).picID) 
+            pic1(posTemp) = image([(roundx2-1) roundx2],[(roundy2-1) roundy2],basePicture);
+            pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);          
+        end   
+        strikedPos = 0;
+        striked = false;
+    end
+    
+    if(roundy2 == 3) 
+        posTemp = roundx2-1 + 9;
+        delete(pic1(posTemp));
+        pause(1)
+        if(p(posTemp).picID ~= p(strikedPos).picID) 
+            pic1(posTemp) = image([(roundx2-1) roundx2],[(roundy2-1) roundy2],basePicture);
+            pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);          
+        end
+        strikedPos = 0;
+        striked = false;
+        
+    end
+    
+    if(roundy2 == 4) 
+        if(roundx2 == 1)
+            delete(pic1(13));
+            pause(1)
+            if(p(13).picID ~= p(strikedPos).picID) 
+                pic1(13) = image([(roundx2-1) roundx2],[(roundy2-1) roundy2],basePicture);
+                pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);          
+            end
+            strikedPos = 0;
+            striked = false;
+        end
+        if(roundx2 == 2)
+            delete(pic1(14));
+            pause(1)
+            if(p(14).picID ~= p(strikedPos).picID) 
+                pic1(14) = image([(roundx2-1) roundx2],[(roundy2-1) roundy2],basePicture);
+                pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);          
+            end
+            strikedPos = 0;
+            striked = false;
+        end
+        if(roundx2 == 3)
+            delete(pic1(15));
+            pause(1)
+            if(p(15).picID ~= p(strikedPos).picID) 
+                pic1(15) = image([(roundx2-1) roundx2],[(roundy2-1) roundy2],basePicture);
+                pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);          
+            end
+            strikedPos = 0;
+            striked = false;
+        end
+        if(roundx2 == 4)
+            delete(pic1(16));
+            pause(1)
+            if(p(16).picID ~= p(strikedPos).picID) 
+                pic1(16) = image([(roundx2-1) roundx2],[(roundy2-1) roundy2],basePicture);
+                pic1(strikedPos) = image([(roundx1-1) roundx1],[(roundy1-1) roundy1],basePicture);          
+            end
+            strikedPos = 0;
+            striked = false;
+        end
+    end
+    
     
     
 end
 
-roundx
+roundx1
