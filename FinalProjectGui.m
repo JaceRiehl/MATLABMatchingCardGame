@@ -190,8 +190,8 @@ while(1)
         posTemp = roundx * roundy
         delete(pic1(posTemp))
         pause(1)
-        
-        pic1(posTemp) = image([(roundx-1) roundx],[(roundy-1) roundy],basePicture)
+        p(posTemp).picID;
+        %pic1(posTemp) = image([(roundx-1) roundx],[(roundy-1) roundy],basePicture)
         strikedPos = posTemp;
         striked = true;
     end
@@ -199,7 +199,7 @@ while(1)
         posTemp = roundx + 4
         delete(pic1(posTemp));
         pause(1)
-        pic1(posTemp) = image([(roundx-1) roundx],[(roundy-1) roundy],basePicture)
+        %pic1(posTemp) = image([(roundx-1) roundx],[(roundy-1) roundy],basePicture)
         strikedPos = posTemp;
         striked = true;
     end
@@ -207,7 +207,7 @@ while(1)
         posTemp = roundx-1 + 9
         delete(pic1(posTemp));
         pause(1)
-        pic1(posTemp) = image([(roundx-1) roundx],[(roundy-1) roundy],basePicture)
+        %pic1(posTemp) = image([(roundx-1) roundx],[(roundy-1) roundy],basePicture)
         strikedPos = posTemp;
         striked = true;
         
@@ -216,28 +216,28 @@ while(1)
         if(roundx == 1)
             delete(pic1(13));
             pause(1)
-            pic1(13) = image([0 1],[3 4],basePicture)
+            %pic1(13) = image([0 1],[3 4],basePicture)
             strikedPos = 13;
             striked = true;
         end
         if(roundx == 2)
             delete(pic1(14));
             pause(1)
-            pic1(14) = image([1 2],[3 4],basePicture)
+            %pic1(14) = image([1 2],[3 4],basePicture)
             strikedPos = 14;
             striked = true;
         end
         if(roundx == 3)
             delete(pic1(15));
             pause(1)
-            pic1(15) = image([2 3],[3 4],basePicture)
+            %pic1(15) = image([2 3],[3 4],basePicture)
             strikedPos = 15;
             striked = true;
         end
         if(roundx == 4)
             delete(pic1(16));
             pause(1)
-            pic1(16) = image([3 4],[3 4],basePicture)
+            %pic1(16) = image([3 4],[3 4],basePicture)
             strikedPos = 16
             striked = true
         end
